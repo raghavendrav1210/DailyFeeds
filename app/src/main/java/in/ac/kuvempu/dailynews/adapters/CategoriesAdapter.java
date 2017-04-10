@@ -1,13 +1,18 @@
 package in.ac.kuvempu.dailynews.adapters;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import in.ac.kuvempu.dailynews.R;
+import in.ac.kuvempu.dailynews.model.CATEGORY;
 
 /**
  * Created by raghav on 4/6/2017.
@@ -15,20 +20,24 @@ import in.ac.kuvempu.dailynews.R;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 
-    private String[] catList;
+    private List<CATEGORY> catList;
 
     public class CategoriesViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
+        private TextView title;
+        private ImageView catLogo;
         private LinearLayout parentLayout;
+        private CardView mCardView;
 
         public CategoriesViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.catTitle);
+            catLogo = (ImageView) view.findViewById(R.id.catLogo);
             parentLayout = (LinearLayout)view.findViewById(R.id.catParentLayout);
+            mCardView = (CardView) view.findViewById(R.id.catCardView);
         }
     }
 
-    public CategoriesAdapter(String[] catList) {
+    public CategoriesAdapter(List<CATEGORY> catList) {
         this.catList = catList;
     }
 
@@ -42,9 +51,18 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public void onBindViewHolder(CategoriesViewHolder holder, final int position) {
-        String category = catList[position];
-        holder.title.setText(category);
+        CATEGORY category = catList.get(position);
+        holder.title.setText(category.getCatName());
+        holder.catLogo.setImageDrawable(category.getImageId());
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(clickListener != null){
+                    clickListener.onItemClick(position);
+                }
+            }
+        });
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(clickListener != null){
@@ -56,7 +74,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public int getItemCount() {
-        return catList.length;
+        return catList.size();
     }
 
     public interface OnItemClickListener {

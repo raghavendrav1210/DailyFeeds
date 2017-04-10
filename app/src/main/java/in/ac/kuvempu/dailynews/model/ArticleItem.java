@@ -24,6 +24,10 @@ public class ArticleItem {
     @Expose
     private String publishedAt;
 
+    private String self;
+
+    private String category;
+
     public Object getAuthor() {
         return author;
     }
@@ -70,6 +74,22 @@ public class ArticleItem {
 
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
+    }
+
+    public void setSelf(String self) {
+        this.self = self;
+    }
+
+    public String getSelf() {
+        return self;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
 }

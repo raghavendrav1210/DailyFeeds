@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/catParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/pad_6dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/headlinesCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cardview_shadow_end_color"
+        android:padding="@dimen/pad_12dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/headlinesImg"
+                    android:layout_width="120dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="left"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/headlinesTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/pad_6dp"
+                    android:layout_weight="0.8"
+                    android:gravity="center_vertical"
+                    android:text="Loading..."
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+            </TableRow>
+        </TableLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

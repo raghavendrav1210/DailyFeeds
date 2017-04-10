@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DailyNews</string>
     <string name="news_cat_general">General</string>
-    <string name="news_cat_economics">Economics</string>
+    <string name="news_cat_economics">Business</string>
     <string name="news_cat_tech">Technology</string>
     <string name="news_cat_sports">Sports</string>
     <string name="news_cat_my_news">News Reported by Me</string>

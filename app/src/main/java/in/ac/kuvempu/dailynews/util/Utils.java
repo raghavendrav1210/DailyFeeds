@@ -8,7 +8,7 @@ public class Utils {
 
     public enum CATEGORIES {
         General ("General"),
-        Economics ("Economics"),
+        Economics ("Business"),
         Technology ("Technology"),
         Sports ("Sports"),
         MyNews ("News Reported by Me");
