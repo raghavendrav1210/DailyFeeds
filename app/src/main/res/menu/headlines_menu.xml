@@ -6,4 +6,10 @@
         android:icon="@drawable/ic_refresh_white_24dp"
         app:showAsAction="always"
         android:id="@+id/reloadNews"/>
+
+    <item android:title="Submit News"
+        android:icon="@drawable/ic_add_white_24dp"
+        app:showAsAction="always"
+        android:visible="false"
+        android:id="@+id/submitNews"/>
 </menu>

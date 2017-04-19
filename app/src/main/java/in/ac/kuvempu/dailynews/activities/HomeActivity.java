@@ -16,6 +16,7 @@ import in.ac.kuvempu.dailynews.adapters.CategoriesAdapter;
 import in.ac.kuvempu.dailynews.custom.VerticalSpaceItemDecoration;
 import in.ac.kuvempu.dailynews.model.CATEGORY;
 import in.ac.kuvempu.dailynews.util.Constants;
+import in.ac.kuvempu.dailynews.util.Utils;
 
 public class HomeActivity extends AppCompatActivity implements CategoriesAdapter.OnItemClickListener {
 
@@ -26,6 +27,11 @@ public class HomeActivity extends AppCompatActivity implements CategoriesAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (!Utils.isConnectingToInternet(this)) {
+            Toast.makeText(this, "Not able to connect to internet. Please check your data connection.", Toast.LENGTH_SHORT).show();
+        }
+
         catRecyclerView = (RecyclerView) findViewById(R.id.catRecyclerView);
         categories = getResources().getStringArray(R.array.categories);
 
@@ -60,8 +66,8 @@ public class HomeActivity extends AppCompatActivity implements CategoriesAdapter
 
         }
 
-        CategoriesAdapter adapter = new CategoriesAdapter(categoryList);
-        adapter.setOnItemClickListener(this);
+        CategoriesAdapter adapter = new CategoriesAdapter(categoryList, this);
+//        adapter.setOnItemClickListener(this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         catRecyclerView.setLayoutManager(mLayoutManager);
@@ -73,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements CategoriesAdapter
     @Override
     public void onItemClick(int position) {
 
-        Toast.makeText(this, categories[position], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, categories[position], Toast.LENGTH_SHORT).show();
 
         switch (categories[position]) {
             case "General":

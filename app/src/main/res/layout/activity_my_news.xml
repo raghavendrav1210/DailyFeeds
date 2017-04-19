@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.ac.kuvempu.dailynews.activities.MyNewsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp">
+
+
+            <EditText
+                android:id="@+id/myNewsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ems="10"
+                android:hint="Title"
+                android:inputType="textMultiLine"
+                android:text="" />
+
+            <EditText
+                android:id="@+id/myNewsDesc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:gravity="top|left"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="6"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/myNewsAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ems="10"
+                android:hint="Author"
+                android:inputType="textMultiLine"
+                android:text="" />
+
+            <EditText
+                android:id="@+id/myNewsPhoneNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:ems="10"
+                android:maxLength="10"
+                android:hint="Phone No"
+                android:inputType="phone|number"
+                android:digits="0123456789+"
+                android:text="" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pad_6dp"
+                    android:text="Add Image"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <ImageView
+                    android:id="@+id/myNewsImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+                <ImageView
+                    android:id="@+id/addImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:padding="@dimen/pad_18dp"
+                    android:src="@drawable/ic_add_white_24dp"
+                    android:tint="@color/colorPrimaryDark" />
+            </LinearLayout>
+
+            <!-- <Button
+                 android:id="@+id/submit"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:layout_weight="1"
+                 android:backgroundTint="@color/colorPrimary"
+                 android:gravity="center"
+                 android:padding="@dimen/pad_14dp"
+                 android:text="Submit"
+                 android:textColor="@color/white" />-->
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

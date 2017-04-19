@@ -28,6 +28,10 @@ public class ArticleItem {
 
     private String category;
 
+    private String phoneNo;
+
+    private String id;
+
     public Object getAuthor() {
         return author;
     }
@@ -92,4 +96,19 @@ public class ArticleItem {
         return category;
     }
 
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

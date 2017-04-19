@@ -17,10 +17,12 @@ import com.bumptech.glide.Glide;
 import in.ac.kuvempu.dailynews.R;
 import in.ac.kuvempu.dailynews.model.ArticleItem;
 import in.ac.kuvempu.dailynews.util.Constants;
+import in.ac.kuvempu.dailynews.util.Utils;
 
 public class NewsDetailsActivity extends AppCompatActivity {
 
     private ArticleItem SELECTED_ITEM = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,31 +31,22 @@ public class NewsDetailsActivity extends AppCompatActivity {
         TextView newsDetailDesc = (TextView) findViewById(R.id.newsDetailsDesc);
         ImageView newsImg = (ImageView) findViewById(R.id.newsImg);
 
-        if (!isConnectingToInternet(this)) {
+        if (!Utils.isConnectingToInternet(this)) {
             Toast.makeText(this, "Not able to connect to internet. Please check your data connection.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Object object = in.ac.kuvempu.dailynews.util.Context.getInstance().get(Constants.HEADLINE);
-        if(object != null){
+        if (object != null) {
             ArticleItem articleItem = (ArticleItem) object;
             SELECTED_ITEM = articleItem;
             newsDetailTitle.setText(articleItem.getTitle());
-            newsDetailDesc.setText(articleItem.getDescription());
+            String more = (articleItem.getPhoneNo() != null ? "\n\n\n\nPhone No:  " + articleItem.getPhoneNo() : "");
+            more += (articleItem.getUrl() != null ? "\n\nRead more at:  " + articleItem.getUrl() : "");
+            newsDetailDesc.setText(articleItem.getDescription() + more);
             Glide.with(this).load(articleItem.getUrlToImage()).into(newsImg);
 
         }
-    }
-
-    public static boolean isConnectingToInternet(Context context) {
-
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-
-        return activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
     }
 
     @Override
@@ -74,10 +67,15 @@ public class NewsDetailsActivity extends AppCompatActivity {
     }
 
     private void shareNews() {
-        if(SELECTED_ITEM != null){
+        if (SELECTED_ITEM != null) {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
-            String shareBody = SELECTED_ITEM.getTitle() +"\n"+SELECTED_ITEM.getUrl() +" find more at daily news";
+            String shareBody = null;
+            if (SELECTED_ITEM.getUrl() != null)
+                shareBody = SELECTED_ITEM.getTitle() + "\n" + SELECTED_ITEM.getUrl() + " find more at daily news";
+            else
+                shareBody = SELECTED_ITEM.getTitle() + "\n" + SELECTED_ITEM.getDescription() + "... find more at daily news";
+
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, SELECTED_ITEM.getTitle() + "from Daily News");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));

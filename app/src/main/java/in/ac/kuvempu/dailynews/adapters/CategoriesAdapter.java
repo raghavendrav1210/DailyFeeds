@@ -25,20 +25,23 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public class CategoriesViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private ImageView catLogo;
-        private LinearLayout parentLayout;
+//        private LinearLayout parentLayout;
+//        private LinearLayout parentLayout1;
         private CardView mCardView;
 
         public CategoriesViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.catTitle);
             catLogo = (ImageView) view.findViewById(R.id.catLogo);
-            parentLayout = (LinearLayout)view.findViewById(R.id.catParentLayout);
+//            parentLayout = (LinearLayout)view.findViewById(R.id.catParentLayout);
+//            parentLayout1 = (LinearLayout)view.findViewById(R.id.catParentLayout1);
             mCardView = (CardView) view.findViewById(R.id.catCardView);
         }
     }
 
-    public CategoriesAdapter(List<CATEGORY> catList) {
+    public CategoriesAdapter(List<CATEGORY> catList, OnItemClickListener clickListener) {
         this.catList = catList;
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -50,26 +53,38 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
     @Override
-    public void onBindViewHolder(CategoriesViewHolder holder, final int position) {
+    public void onBindViewHolder(final CategoriesViewHolder holder, final int position) {
         CATEGORY category = catList.get(position);
         holder.title.setText(category.getCatName());
         holder.catLogo.setImageDrawable(category.getImageId());
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(clickListener != null){
-                    clickListener.onItemClick(position);
-                }
-            }
-        });
+
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(clickListener != null){
-                    clickListener.onItemClick(position);
+                    clickListener.onItemClick(holder.getAdapterPosition());
                 }
             }
         });
+
+/*        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(clickListener != null){
+                    clickListener.onItemClick(holder.getAdapterPosition());
+                }
+            }
+        });
+
+        holder.parentLayout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(clickListener != null){
+                    clickListener.onItemClick(holder.getAdapterPosition());
+                }
+            }
+        });*/
+
     }
 
     @Override

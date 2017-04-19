@@ -26,6 +26,7 @@ public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.Head
 
     private List<ArticleItem> headlines;
     private Context mContext;
+    private String category;
 
     public class HeadLinesViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
@@ -41,10 +42,12 @@ public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.Head
         }
     }
 
-    public HeadLinesAdapter(List<ArticleItem> headlines, Context mContext, OnNewsItemClickListener clickListener) {
+    public HeadLinesAdapter(List<ArticleItem> headlines, Context mContext, OnNewsItemClickListener clickListener, OnNewsItemLongClickListener longClickListener, String category) {
         this.headlines = headlines;
         this.mContext = mContext;
         this.clickListener = clickListener;
+        this.longClickListener = longClickListener;
+        this.category = category;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.Head
     }
 
     @Override
-    public void onBindViewHolder(HeadLinesViewHolder holder, final int position) {
+    public void onBindViewHolder(final HeadLinesViewHolder holder, final int position) {
         final ArticleItem headline = headlines.get(position);
 
         String title = headline.getTitle();
@@ -71,7 +74,8 @@ public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.Head
         }
         holder.title.setText(title);
 
-        Glide.with(mContext).load(headline.getUrlToImage()).into(holder.headlinesLogo);
+        if(headline.getUrlToImage() != null)
+            Glide.with(mContext).load(headline.getUrlToImage()).into(holder.headlinesLogo);
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +83,22 @@ public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.Head
                 if(clickListener != null){
                     clickListener.onItemClick(headline);
                 }
+            }
+        });
+
+        holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                boolean selfNews = category != null && category.equalsIgnoreCase("News Reported by Me");
+                if(selfNews) {
+                    if (longClickListener != null) {
+                        longClickListener.onItemLongClick(headline, holder.getAdapterPosition());
+                    }
+
+                    return true;
+                }
+
+                return false;
             }
         });
     }
@@ -92,8 +112,15 @@ public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.Head
         public void onItemClick(ArticleItem item);
     }
 
+    public interface OnNewsItemLongClickListener {
+        public void onItemLongClick(ArticleItem item, int position);
+    }
+
     private OnNewsItemClickListener clickListener;
+    private OnNewsItemLongClickListener longClickListener;
     public void setOnNewsItemClickListener(OnNewsItemClickListener clickListener){
         this.clickListener = clickListener;
     }
+
+
 }

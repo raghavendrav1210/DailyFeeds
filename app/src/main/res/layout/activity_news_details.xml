@@ -6,49 +6,55 @@
     android:layout_height="match_parent"
     tools:context="in.ac.kuvempu.dailynews.activities.NewsDetailsActivity">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp">
+        android:fillViewport="true">
 
-        <ImageView
-            android:id="@+id/newsImg"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_launcher" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.01"
-            android:background="@color/colorPrimary" />
+            <ImageView
+                android:id="@+id/newsImg"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_launcher" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.01"
+                android:background="@color/colorPrimary" />
 
-            <TextView
-                android:id="@+id/newsDetailsTitle"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/pad_6dp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_weight="0.5">
 
-            <TextView
-                android:id="@+id/newsDetailsDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/newsDetailsTitle"
-                android:padding="@dimen/pad_6dp"
-                android:textSize="16sp"
-                android:textStyle="normal"/>
-        </RelativeLayout>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/newsDetailsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/pad_6dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/newsDetailsDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/newsDetailsTitle"
+                    android:autoLink="web"
+                    android:padding="@dimen/pad_6dp"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
