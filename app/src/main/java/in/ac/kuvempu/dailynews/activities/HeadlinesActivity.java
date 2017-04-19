@@ -131,7 +131,9 @@ public class HeadLinesActivity extends AppCompatActivity implements HeadLinesAda
                 articles.addAll(articleItems);
                 loadHeadlines(articleItems);
             } else {
-
+                if(pDialog != null && pDialog.isShowing()) {
+                    pDialog.dismissWithAnimation();
+                }
             }
         }
 
@@ -257,6 +259,9 @@ public class HeadLinesActivity extends AppCompatActivity implements HeadLinesAda
             @Override
             public void onFailure(Call<Article> call, Throwable throwable) {
                 Log.e("Failed", throwable.toString());
+                if(pDialog != null && pDialog.isShowing()) {
+                    pDialog.dismissWithAnimation();
+                }
             }
 
         });

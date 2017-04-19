@@ -73,9 +73,10 @@ public class NewsDetailsActivity extends AppCompatActivity {
             String shareBody = null;
             if (SELECTED_ITEM.getUrl() != null)
                 shareBody = SELECTED_ITEM.getTitle() + "\n" + SELECTED_ITEM.getUrl() + " find more at daily news";
-            else
-                shareBody = SELECTED_ITEM.getTitle() + "\n" + SELECTED_ITEM.getDescription() + "... find more at daily news";
-
+            else {
+                shareBody = SELECTED_ITEM.getTitle() + "\n" + SELECTED_ITEM.getDescription()  + "\nAuthor: " + SELECTED_ITEM.getAuthor()
+                        + "\nPhone No:" + SELECTED_ITEM.getPhoneNo() + "... find more at daily news";
+            }
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, SELECTED_ITEM.getTitle() + "from Daily News");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
